@@ -14,7 +14,7 @@
 }
 
 .error-count {
-    color: red;
+    color: rgba(246, 161, 50, 0.903);
     text-align: center;
     font-size: 18px;
 }
