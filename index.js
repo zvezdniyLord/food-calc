@@ -5,30 +5,39 @@ btn.addEventListener("click", () => {
     const countPizza = document.querySelector(".count-pizza").value
     const pizza = new Pizza(countPizza);
     const resultPizza = pizza.isCount();
-    resultsDiv.insertAdjacentHTML("beforeend",
+    if(countPizza >= 1) {
+        resultsDiv.insertAdjacentHTML("beforeend",
     `
     <div class="result">
-        <h2>Столько нужно для ${countPizza == 1 ? countPizza + " пиццы" : countPizza + " пицц"}</h2>
+        <h2>Столько нужно для 
+        ${countPizza == 1 ? countPizza + " пиццы" : countPizza +
+        " пицц"}</h2>
         <p>Дрожжи: ${resultPizza.droggi}г</p>
         <p>Мука: ${resultPizza.powder}г</p>
         <p>Соль: ${resultPizza.salt}г</p>
         <p>Вода: ${resultPizza.water}г</p>
     </div>
     `);
+    } else {
+        const errorCount = document.createElement("div");
+        errorCount.innerHTML = "Не корректное число";
+        errorCount.classList.add("error-count")
+        resultsDiv.appendChild(errorCount);
+    }
 })
 
 class Pizza {
-    count;
+    #count;
     constructor(count) {
-        this.count = count;
+        this.#count = count;
     }
 
     isCount() {
         return {
-            powder: 202.5 * this.count,
-            water: 132.5 * this.count,
-            salt: 4 * this.count,
-            droggi: (0.4 * this.count).toFixed(2),
+            powder: 202.5 * this.#count,
+            water: 132.5 * this.#count,
+            salt: 4 * this.#count,
+            droggi: (0.4 * this.#count).toFixed(2),
         }
     }
 }
